@@ -1,5 +1,6 @@
 UCI/
 .vscode/
+UCIContinuous/
 
 # Compiled class file
 *.class
