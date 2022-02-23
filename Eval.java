@@ -17,12 +17,14 @@ import java.nio.file.*;
 
 public class Eval {
 
+    public static Classifier[] classifierArray = new Classifier[]{new J48(), new AdaBoostM1(), new BayesNet(), new DecisionStump(), new HoeffdingTree(), new IBk(), new LMT(), new LogitBoost(), new NaiveBayes(), new NaiveBayesMultinomialText(), new RandomForest(), new RandomTree(), new REPTree()};
+
     public static class UCIDataset {
         
         private Instances trainInstances;
         private Instances testInstances;
         private double split = 0.5;
-        private String dataDir;
+        public String dataDir;
 
         public UCIDataset(String dataDir, double split) throws FileNotFoundException, IOException {
             this.dataDir = dataDir;
@@ -141,8 +143,7 @@ public class Eval {
 
             System.out.println(classifierName);
             System.out.println(evaluation.toSummaryString());
-            
-            writer.write("\n");
+
         }
         writer.close();
     }
@@ -152,7 +153,7 @@ public class Eval {
         try {
             // getClassifierProbabilities(new AdaBoostM1(), getDatasets(Paths.get(".", "UCI").toFile()));
 
-            getClassifierMetrics(new Classifier[]{new J48(), new AdaBoostM1(), new BayesNet(), new DecisionStump(), new HoeffdingTree(), new IBk(), new LMT(), new LogitBoost(), new NaiveBayes(), new NaiveBayesMultinomialText(), new RandomForest(), new RandomTree(), new REPTree()}, new UCIDataset(Paths.get(".", "UCIContinuous", "bank").toString()));
+            getClassifierMetrics(classifierArray, new UCIDataset(Paths.get(".", "UCIContinuous", "bank").toString()));
 
 
 
